@@ -1,4 +1,5 @@
-let video = document.querySelector(video);
+//let video = document.querySelector(iframe);
+let video = document.getElementById('testVideo');
 let isPaused = false;
 
 const observer = new IntersectionObserver(foo);
