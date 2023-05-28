@@ -2,16 +2,15 @@ window.onload = () => {
     const options= {
         root: null,
         rootMargin: '0px',
-        threshold: 0.5
+        threshold: 0.8
     };
 
     const observer = new IntersectionObserver(foo, options);
 
     function foo(entries, observer){
-        entries.forEach(e => {
-            if(e.isIntersecting){
-                const activeImg = e.target;
-                activeImg.style.background = 'blue';
+        entries.forEach(el => {
+            if(el.isIntersecting){
+                el.target.src = el.target.dataset.src;
                 observer.unobserve(activeImg);
     }})
     }
