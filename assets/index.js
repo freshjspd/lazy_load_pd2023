@@ -1,27 +1,25 @@
-const list = document.getElementById('list');
-let count = 0;
+window.onload = () => {
+    const options= {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.5
+    };
 
-const observer = new IntersectionObserver(foo);
-observer.observe(document.getElementById('itemLoader'));
+    const observer = new IntersectionObserver(foo, options);
 
-function foo(entries, observer){
-    entries.forEach(el => {
-        if(el.isIntersecting){
-            addItemToList();
-        }
-    });
-}
-
-function createItem(){
-    const li = document.createElement('li');
-    li.classList.add('item');
-    li.innerText = `${++count} item`;
-    return li;
-}
-
-function addItemToList(){
-    for(let i=0; i<30; i++){
-        list.prepend(createItem());
+    function foo(entries, observer){
+        entries.forEach(e => {
+            if(e.isIntersecting){
+                const activeImg = e.target;
+                activeImg.style.background = 'blue';
+                observer.unobserve(activeImg);
+    }})
     }
-    list.scrollTo(0,700);
+
+    const imgArr = document.querySelectorAll('img');
+
+    imgArr.forEach(i => {
+        observer.observe(i);
+    });
+
 }
