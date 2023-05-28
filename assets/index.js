@@ -1,24 +1,19 @@
-window.onload = () => {
-    const options= {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.8
-    };
+let video = document.querySelector(video);
+let isPaused = false;
 
-    const observer = new IntersectionObserver(foo, options);
+const observer = new IntersectionObserver(foo);
 
-    function foo(entries, observer){
-        entries.forEach(el => {
-            if(el.isIntersecting){
-                el.target.src = el.target.dataset.src;
-                observer.unobserve(activeImg);
-    }})
-    }
+observer.observe(video);
 
-    const imgArr = document.querySelectorAll('img');
-
-    imgArr.forEach(i => {
-        observer.observe(i);
-    });
+function foo(entries, observer){
+    entries.forEach(el => {
+        if(el.isIntersecting && !video.paused){
+            video.pause();
+            isPaused = true;
+        } else{
+            video.play();
+            isPaused = false;
+        }
+    })
 
 }
